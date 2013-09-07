@@ -19,6 +19,7 @@ CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFT
 OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 '''
 
+from Yowsup.Common.debugger import Debugger
 
 import threading
 class SignalInterfaceBase(object):
@@ -94,6 +95,7 @@ class SignalInterfaceBase(object):
 		]
 	
 	def __init__(self):#@@TODO unified naming pattern
+		Debugger.attach(self)
 		self.registeredSignals = {}
 	
 	def getSignals(self):
@@ -116,6 +118,7 @@ class SignalInterfaceBase(object):
 		self._sendAsync(signalName, args)
 	
 	def getListeners(self, signalName):
+		self._d("Sending signal %s" % signalName)
 		if self.hasSignal(signalName):
 			
 			
